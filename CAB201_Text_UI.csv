@@ -1,0 +1,195 @@
+Main Menu
+-----------------
+(1) Register
+(2) Sign In
+(3) Exit
+Please select an option between 1 and 3
+>
+
+Registration
+------------------
+Please enter your name
+>
+
+Invalid Input: The supplied value is not a valid name
+
+Please enter your email address
+>
+
+Please choose a password
+* At least 8 characters
+* No white space characters
+* At least one upper-case letter
+* At least one lower-case letter
+* At least one digit
+* At least one special character
+>
+
+Invalid Input: The supplied value is not a valid password
+
+Client {name}({email}) has successfully registered at the Auction House.
+
+Sign In
+----------
+Please enter your email address
+>
+
+Please enter your password
+>
+
+Personal Details for {name}({email})
+------------------------------------------------------
+Please provide your home address.
+Unit number (0 = none):
+>
+
+Invalid Input: Unit number must be a non-negative integer.
+
+Street number:
+>
+
+Invalid Input: Street number must be a positve integer.
+Invalid Input: Street number must be greater than 0.
+
+Street suffix:
+>
+
+City:
+>
+
+State (ACT, NSW, NT, QLD, SA, TAS, VIC, WA):
+>
+
+Postcode (1000 .. 9999):
+>
+
+Address has been update to {address}
+
+Client Menu
+------------------
+(1) Advertise Product
+(2) View My Product List
+(3) Search For Advertised Products
+(4) View Bids On My Products
+(5) View My Purchased Items
+(6) Log off
+
+Please select an option between 1 and 6
+>
+
+Product Advertisement for {name}({email})
+------------------------------------------------
+Product name
+>
+
+Product description
+>
+
+Product price ($d.cc)
+>
+
+Invalid Input: A currency value is requred, e.g. $54.95, $9.99, $2314.15.
+
+Successfully added product {product name}, {product description}, {product price}.
+
+Product List for {name}({email})
+------------------------------------------------
+You have no advertised products at the moment.
+
+| Item # | Product name | Description | List price | Bidder name | Bidder email | Bid amt |
+| -------- | ---------------- | -------------- | ------------ | --------------- | ---------------- | --------- |
+|            |                        |                     |                  |                     |                        |              |
+
+Product search for {name}({email})
+-------------------------------------------------
+
+Please supply a search phrase (ALL to see all products)
+>
+
+Search results
+----------------------
+| Item # | Product name | Description | List price | Bidder name | Bidder email | Bid amt |
+| -------- | ---------------- | -------------- | ------------ | --------------- | ---------------- | --------- |
+|            |                        |                     |                  |                     |                        |              |
+
+Would you like to place a bid on any of these items (yes or no)?
+> yes
+
+Please enter a non-negative integer between 1 and {total_items}:
+>
+
+Bidding for {product name} ({product price}), current highest bid {highest bid}
+
+How much do you bid?
+>
+
+Your bid of {bid} for {product name} is placed.
+
+Delivery Instructions
+-------------------------------
+(1) Click and collect
+(2) Home Delivery
+
+Please select an option between 1 and 2
+>
+
+Delivery window start (dd/mm/yyyy hh:mm)
+>
+
+Invalid Input: Delivery window start must be at least one hour in the future.
+Invalid Input: Please enter a valid data and time.
+
+Delivery window end (dd/mm/yyyy hh:mm))
+>
+
+Invalid Input: Delivery window end must be at least one hour later than the start.
+Invalid Input: Please enter a valid data and time.
+
+Thank you for your bid. If successful, the item will be provided via collection between {start time} on {start date} and {end time} on {end date}.
+
+Please provide your delivery address.
+Unit number (0 = none):
+>
+
+Street number:
+>
+
+Street suffix:
+>
+
+City:
+>
+
+State (ACT, NSW, NT, QLD, SA, TAS, VIC, WA):
+>
+
+Postcode (1000 .. 9999):
+>
+
+Thank you for your bid. If successful, the item will be provided via delivery to {unit number} / {street number} {street suffix} {city} {state} {postcode} 
+
+List Product Bids for {name}({email})
+-------------------------------------------------------
+
+No bids were found
+
+| Item # | Product name | Description | List price | Bidder name | Bidder email | Bid amt |
+| -------- | ---------------- | -------------- | ------------ | --------------- | ---------------- | --------- |
+|            |                        |                     |                  |                     |                        |              |
+
+Would you like to sell something (yes or no)?
+> yes
+
+Please enter an integer between 1 and {total products}:
+>
+
+You have sold {product name} to {client who bid} for {highest bid}.
+
+Purchased Items for {name}({email})
+-------------------------------------------------------
+
+You have no purchased products at the moment.
+
+| Item # | Product name | Description | List price | Bidder name | Bidder email | Bid amt |
+| -------- | ---------------- | -------------- | ------------ | --------------- | ---------------- | --------- |
+|            |                        |                     |                  |                     |                        |              |
