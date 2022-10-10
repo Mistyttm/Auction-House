@@ -18,7 +18,7 @@ namespace AuctionHouse
 
             // Regexes
             string emailRegex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
-            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\,])[A-Za-z\d@$!%*?&\,]{8,}$";
 
 
             WriteLine("Registration");
@@ -70,11 +70,17 @@ namespace AuctionHouse
                     validPassword = true;
                 }
             }
+            string fileName = "registeredUsers.csv";
+            string combinedString = username + "," + email + "," + password + "\n";
+            WriteToFile.Write(fileName, combinedString.ToString());
 
-            WriteLine(username);
-            WriteLine(email);
-            WriteLine(password);
+            WriteLine("Client {0}({1}) has successfully registered at the Auction House.", username, email);
 
+            int milliseconds = 2000;
+            Thread.Sleep(milliseconds);
+
+            MainMenu menu = new MainMenu();
+            menu.menu(args);
         }
     }
 }

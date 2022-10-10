@@ -27,7 +27,8 @@ namespace AuctionHouse
                     WriteLine("Sign In");
                     break;
                 case 3:
-                    WriteLine("Exit");
+                    Exit exit = new Exit();
+                    exit.endProgram(args);
                     break;
                 default:
                     WriteLine("Invalid option");
