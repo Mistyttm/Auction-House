@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static System.Console;
+using System.IO;
 
 namespace AuctionHouse
 {
@@ -16,8 +17,6 @@ namespace AuctionHouse
             // Please enter your password
             // >
 
-            string correctEmail = "";
-            string correctPassword = "";
             string[] signedinUser = new string[2];
 
             bool validEmail = false;
@@ -29,27 +28,40 @@ namespace AuctionHouse
             while (validEmail == false) {
                 Write("Please enter your email address\n> ");
                 string email = ReadLine();
-                WriteToFile.Read("registeredUsers.csv", email, correctEmail);
-                if (correctEmail == "Error" || correctEmail ==""){
-                    WriteLine("No match found");
-                } else {
-                    signedinUser[0] = correctEmail;
-                    validEmail = true;
+                using (StreamReader sr = File.OpenText("registeredUsers.csv")){
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        if (s.Contains("," + email + ",")){
+                            string[] words = s.Split(',');
+                            int inputWord = Array.IndexOf(words, email); 
+                            signedinUser[0] = words[inputWord];
+                            validEmail = true;
+                        } else {
+                            WriteLine("No Match Found!");
+                        }
+                    }
                 }
             }
 
             while (validPass == false){
                 Write("Please enter your password\n> ");
                 string password = ReadLine();
-                WriteToFile.Read("registeredUsers.csv", password, correctPassword);
-                if (correctPassword == "Error"){
-                    WriteLine("No match found");
-                } else {
-                    signedinUser[1] = correctPassword;
+                using (StreamReader sr = File.OpenText("registeredUsers.csv")){
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        if (s.Contains("," + password + ",")){
+                            string[] words = s.Split(',');
+                            int inputWord = Array.IndexOf(words, password); 
+                            signedinUser[1] = words[inputWord];
+                            validEmail = true;
+                        } else {
+                            WriteLine("No Match Found!");
+                        }
+                    }
                 }
             }
-                        
         }
-        
     }
 }
