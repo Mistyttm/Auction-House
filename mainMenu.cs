@@ -24,7 +24,8 @@ namespace AuctionHouse
                     user.register(args);
                     break;
                 case 2:
-                    WriteLine("Sign In");
+                    SignIn signin = new SignIn();
+                    signin.signIn(args);
                     break;
                 case 3:
                     Exit exit = new Exit();
