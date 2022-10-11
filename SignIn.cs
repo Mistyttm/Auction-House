@@ -19,7 +19,7 @@ namespace AuctionHouse
             string correctEmail = "";
             string correctPassword = "";
             string[] signedinUser = new string[2];
-            string[] clientMenu = new string[] {"Advertise Product", "View My Product List", "Search For Advertised Products", "View Bids On My Products", "View My Purchased Items", "Log Off"};
+        
 
             bool validEmail = false;
             bool validPass = false;
@@ -65,10 +65,10 @@ namespace AuctionHouse
             string[] firstSignInCheck = fileRead.ReadLine("registeredUsers.csv", signedinUser[0]);
 
             if (validEmail == true && validPass == true && firstSignInCheck[3] == "true"){
-                menu.clientMenu(clientMenu, "Client Menu", signedinUser, args);
+                menu.clientMenu(signedinUser, args);
             } else if (validEmail == true && validPass == true && firstSignInCheck[3] == "false") {
                 PersonalDetails details = new PersonalDetails();
-                details.Test(args);
+                details.enterDetails(args, signedinUser);
             } else {
                 menu.homeMenu(args);
             }

@@ -1,9 +1,9 @@
-name,email,password,oneTimeSignIn,unitNumber,streetNumber,streetSuffix,city,state,postcode
-emmey,emmey.leo@gmail.com,Rh797$gs,false,
+name,email,password,oneTimeSignIn,unitNumber,streetNumber,streetName,streetSuffix,city,state,postcode
+emmey,emmey.leo@gmail.com,Rh797$gs,true,0,21,Street,St,Brisbane,QLD,4123
 John,johnappleseed@gmail.com,Rh797$gs,false,
-Greg,greg.gregley@gmail.com,Rh797$gs,false,
+Greg,greg.gregley@gmail.com,Rh797$gs,true,0,43,Sniffer,Lane,Sunkist,ACT,5549
 Luna,lunaluna@gmail.com,Rh797$gs,false,
-Lawrence,tutorman@gmail.com,Rh797$gs,false,
+Lawrence,tutorman@gmail.com,Rh797$gs,true,4,55,Tutir,Cr,Brisbane,NSW,2192
 April,aprilmayjune@gmail.com,Rh797$gs,false,
 Johnny,johnny.sins@gmail.com,Rh797$gs,false,
 Greg,greg.heffly@hotmail.com,Rh797$gs,false,

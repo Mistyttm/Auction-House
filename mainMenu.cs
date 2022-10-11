@@ -35,9 +35,10 @@ namespace AuctionHouse
             }
         }
 
-        public void clientMenu(string[] options, string title, string[] credentials, string[] args){
+        public void clientMenu(string[] credentials, string[] args){
+            string[] clientMenu = new string[] {"Advertise Product", "View My Product List", "Search For Advertised Products", "View Bids On My Products", "View My Purchased Items", "Log Off"};
             Menu menu = new Menu();
-            menu.menu(options, title);
+            menu.menu(clientMenu, "Client Menu");
 
             int choice = Convert.ToInt32( ReadLine() );
             switch (choice){

@@ -55,5 +55,32 @@ namespace AuctionHouse
             }
             return output;
         }
+
+        public string OverWriteLine(string fileName, string user, string text){
+            string output = "";
+            int lineToEdit = 0;
+            string[] arrLine = File.ReadAllLines(fileName);
+            int LineNumber = 0;
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                bool found = false;
+                while ((s = sr.ReadLine()) != null && found == false)
+                {
+                    if (s.Contains(","+user+",")){
+                        string[] words = s.Split(',');
+                        lineToEdit = LineNumber;
+                        output = "Success";
+                        found = true;                   
+                    } else {
+                        LineNumber++;
+                        output = "Error";
+                    }
+                }
+            }
+            arrLine[lineToEdit] = text;
+            File.WriteAllLines(fileName, arrLine);
+            return output;
+        }
     }
 }
