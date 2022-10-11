@@ -15,7 +15,7 @@ namespace AuctionHouse
             }
         }
 
-        public string Read(string fileName, string text){
+        public string ReadVariable(string fileName, string text){
             string output = "";
             using (StreamReader sr = File.OpenText(fileName))
             {
@@ -30,6 +30,26 @@ namespace AuctionHouse
                         found = true;
                     } else {
                         output = "Error";
+                    }
+                }
+            }
+            return output;
+        }
+
+        public string[] ReadLine(string fileName, string user){
+            string[] output = new string[4];
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                bool found = false;
+                while ((s = sr.ReadLine()) != null && found == false)
+                {
+                    if (s.Contains(","+user+",")){
+                        string[] words = s.Split(',');
+                        output = words;
+                        found = true;
+                    } else {
+                        output[0] = "Error";
                     }
                 }
             }

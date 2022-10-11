@@ -45,7 +45,7 @@ namespace AuctionHouse
 
                 bool validEmailRegex = check.emailCheck(emailInput);
                 if (validEmailRegex == true){
-                    string emailExists = file.Read("registeredUsers.csv", emailInput);
+                    string emailExists = file.ReadVariable("registeredUsers.csv", emailInput);
                     // Check if email is valid
                     if (emailExists == "Error"){
                         email = emailInput;
@@ -70,7 +70,7 @@ namespace AuctionHouse
                 }
             }
             string fileName = "registeredUsers.csv";
-            string combinedString = username + "," + email + "," + password;
+            string combinedString = username + "," + email + "," + password + "false,";
             WriteToFile.Write(fileName, combinedString.ToString());
 
             WriteLine("Client {0}({1}) has successfully registered at the Auction House.", username, email);
