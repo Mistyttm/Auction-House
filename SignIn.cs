@@ -19,6 +19,7 @@ namespace AuctionHouse
             string correctEmail = "";
             string correctPassword = "";
             string[] signedinUser = new string[2];
+            string[] clientMenu = new string[] {"Advertise Product", "View My Product List", "Search For Advertised Products", "View Bids On My Products", "View My Purchased Items", "Log Off"};
 
             bool validEmail = false;
             bool validPass = false;
@@ -28,6 +29,7 @@ namespace AuctionHouse
 
             WriteToFile fileRead = new WriteToFile();
             Checks check = new Checks();
+            MainMenu menu = new MainMenu();
 
             while (validEmail == false) {
                 Write("Please enter your email address\n> ");
@@ -42,8 +44,6 @@ namespace AuctionHouse
                         WriteLine("No match found");
                     } else if (correctEmail == email && regexEmail == true){
                         signedinUser[0] = correctEmail;
-                        WriteLine("Email found");
-
                         validEmail = true;
                     }
                 }
@@ -55,13 +55,18 @@ namespace AuctionHouse
                 correctPassword = fileRead.Read("registeredUsers.csv", password);
                 if (correctPassword == "Error"){
                     WriteLine("No match found");
+                    menu.homeMenu(args);
                 } else {
                     signedinUser[1] = correctPassword;
                     validPass = true;
                 }
             }
-                        
+
+            if (validEmail == true && validPass == true){
+                menu.clientMenu(clientMenu, "Client Menu", signedinUser, args);
+            } else {
+                menu.homeMenu(args);
+            }
         }
-        
     }
 }

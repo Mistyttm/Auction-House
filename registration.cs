@@ -17,6 +17,7 @@ namespace AuctionHouse
             string email = "";
 
             Checks check = new Checks();
+            WriteToFile file = new WriteToFile();
 
             WriteLine("Registration");
             WriteLine("-----------------");
@@ -43,11 +44,15 @@ namespace AuctionHouse
                 string emailInput = ReadLine();
 
                 bool validEmailRegex = check.emailCheck(emailInput);
-
-                // Check if email is valid
                 if (validEmailRegex == true){
-                    email = emailInput;
-                    validEmail = true;
+                    string emailExists = file.Read("registeredUsers.csv", emailInput);
+                    // Check if email is valid
+                    if (emailExists == "Error"){
+                        email = emailInput;
+                        validEmail = true;
+                    }  else {
+                        WriteLine("Invalid Input: This email address already exists");
+                    }
                 }
             }
 
@@ -60,12 +65,12 @@ namespace AuctionHouse
 
                 // Check if email is valid
                 if (validPassRegex == true){
-                    email = passwordIn;
-                    validEmail = true;
+                    password = passwordIn;
+                    validPassword = true;
                 }
             }
             string fileName = "registeredUsers.csv";
-            string combinedString = username + "," + email + "," + password + "\n";
+            string combinedString = username + "," + email + "," + password;
             WriteToFile.Write(fileName, combinedString.ToString());
 
             WriteLine("Client {0}({1}) has successfully registered at the Auction House.", username, email);
@@ -74,7 +79,7 @@ namespace AuctionHouse
             Thread.Sleep(milliseconds);
 
             MainMenu menu = new MainMenu();
-            menu.menu(args);
+            menu.homeMenu(args);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains(text)){
+                    if (s.Contains(","+text+",")){
                         string[] words = s.Split(',');
                         int inputWord = Array.IndexOf(words, text); 
                         output = words[inputWord];
