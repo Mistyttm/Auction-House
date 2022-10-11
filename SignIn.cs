@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static System.Console;
-using System.IO;
 
 namespace AuctionHouse
 {
@@ -17,6 +16,8 @@ namespace AuctionHouse
             // Please enter your password
             // >
 
+            string correctEmail = "";
+            string correctPassword = "";
             string[] signedinUser = new string[2];
 
             bool validEmail = false;
@@ -25,21 +26,25 @@ namespace AuctionHouse
             WriteLine("Sign In");
             WriteLine("----------");
 
+            WriteToFile fileRead = new WriteToFile();
+            Checks check = new Checks();
+
             while (validEmail == false) {
                 Write("Please enter your email address\n> ");
-                string email = ReadLine();
-                using (StreamReader sr = File.OpenText("registeredUsers.csv")){
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        if (s.Contains("," + email + ",")){
-                            string[] words = s.Split(',');
-                            int inputWord = Array.IndexOf(words, email); 
-                            signedinUser[0] = words[inputWord];
-                            validEmail = true;
-                        } else {
-                            WriteLine("No Match Found!");
-                        }
+
+                string email = ReadLine().ToString();
+                bool regexEmail = check.emailCheck(email);
+
+                if (regexEmail == true){
+                    correctEmail = fileRead.Read("registeredUsers.csv", email);
+
+                    if (correctEmail == "Error" || regexEmail == false){
+                        WriteLine("No match found");
+                    } else if (correctEmail == email && regexEmail == true){
+                        signedinUser[0] = correctEmail;
+                        WriteLine("Email found");
+
+                        validEmail = true;
                     }
                 }
             }
@@ -47,21 +52,16 @@ namespace AuctionHouse
             while (validPass == false){
                 Write("Please enter your password\n> ");
                 string password = ReadLine();
-                using (StreamReader sr = File.OpenText("registeredUsers.csv")){
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        if (s.Contains("," + password + ",")){
-                            string[] words = s.Split(',');
-                            int inputWord = Array.IndexOf(words, password); 
-                            signedinUser[1] = words[inputWord];
-                            validEmail = true;
-                        } else {
-                            WriteLine("No Match Found!");
-                        }
-                    }
+                correctPassword = fileRead.Read("registeredUsers.csv", password);
+                if (correctPassword == "Error"){
+                    WriteLine("No match found");
+                } else {
+                    signedinUser[1] = correctPassword;
+                    validPass = true;
                 }
             }
+                        
         }
+        
     }
 }
