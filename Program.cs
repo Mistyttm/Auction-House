@@ -9,7 +9,7 @@ namespace AuctionHouse
         static void Main(string[] args)
         {
             MainMenu menu = new MainMenu();
-            menu.menu(args);
+            menu.homeMenu(args);
         }
     }
 }

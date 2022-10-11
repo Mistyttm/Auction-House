@@ -8,14 +8,12 @@ namespace AuctionHouse
 {
     public class MainMenu
     {
-        public void menu(string[] args){
-            WriteLine("Main Menu");
-            WriteLine("-----------------");
-            WriteLine("(1) Register");
-            WriteLine("(2) Sign In");
-            WriteLine("(3) Exit");
-            Write("Please select an option between 1 and 3\n> ");
+        public void homeMenu(string[] args){
+
+            string[] options = new string[] {"Register", "Sign In", "Exit"};
             
+            Menu menu = new Menu();
+            menu.menu(options, "Main Menu");
 
             int choice = Convert.ToInt32( ReadLine() );
             switch(choice){
@@ -33,6 +31,34 @@ namespace AuctionHouse
                     break;
                 default:
                     WriteLine("Invalid option");
+                    break;
+            }
+        }
+
+        public void clientMenu(string[] options, string title, string[] credentials, string[] args){
+            Menu menu = new Menu();
+            menu.menu(options, title);
+
+            int choice = Convert.ToInt32( ReadLine() );
+            switch (choice){
+                case 1:
+                    WriteLine("Advertise Product");
+                    break;
+                case 2:
+                    WriteLine("View My Product List");
+                    break;
+                case 3:
+                    WriteLine("Search For Advertised Products");
+                    break;
+                case 4:
+                    WriteLine("View Bids On My Products");
+                    break;
+                case 5:
+                    WriteLine("View My Purchased Items");
+                    break;
+                case 6:
+                    Exit exit = new Exit();
+                    exit.logOut(args);
                     break;
             }
         }

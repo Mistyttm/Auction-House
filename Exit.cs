@@ -11,5 +11,10 @@ namespace AuctionHouse
             Console.WriteLine("Exit");
             Environment.Exit(0);
         }
+
+        public void logOut(string[] args){
+            MainMenu menu = new MainMenu();
+            menu.homeMenu(args);
+        }
     }
 }
