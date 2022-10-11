@@ -16,10 +16,7 @@ namespace AuctionHouse
             string password = "";
             string email = "";
 
-            // Regexes
-            string emailRegex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
-            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\,])[A-Za-z\d@$!%*?&\,]{8,}$";
-
+            Checks check = new Checks();
 
             WriteLine("Registration");
             WriteLine("-----------------");
@@ -44,12 +41,11 @@ namespace AuctionHouse
             while (validEmail == false){
                 Write("Please enter your email address\n> ");
                 string emailInput = ReadLine();
-                var match = Regex.Match(emailInput, emailRegex);
+
+                bool validEmailRegex = check.emailCheck(emailInput);
 
                 // Check if email is valid
-                if (!match.Success){
-                    WriteLine("Invalid Input: The supplied value is not a valid email address");
-                } else {
+                if (validEmailRegex == true){
                     email = emailInput;
                     validEmail = true;
                 }
@@ -60,14 +56,12 @@ namespace AuctionHouse
             while (validPassword == false){
                 Write("Please choose a password\n> ");
                 string passwordIn = ReadLine();
-                var match = Regex.Match(passwordIn, passwordRegex);
+                bool validPassRegex = check.passwordCheck(passwordIn);
 
-                // Check if password is valid
-                if (!match.Success){
-                    WriteLine("Invalid Input: The supplied value is not a valid password");
-                } else {
-                    password = passwordIn;
-                    validPassword = true;
+                // Check if email is valid
+                if (validPassRegex == true){
+                    email = passwordIn;
+                    validEmail = true;
                 }
             }
             string fileName = "registeredUsers.csv";
