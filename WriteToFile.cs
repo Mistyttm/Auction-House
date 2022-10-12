@@ -8,7 +8,7 @@ using static System.Console;
 namespace AuctionHouse
 {
     public class WriteToFile{
-        public static void Write(string fileName, string text){
+        public void Write(string fileName, string text){
             using (StreamWriter sw = File.AppendText(fileName))
             {
                 sw.WriteLine(text);
