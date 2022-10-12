@@ -1,6 +1,7 @@
 # CAB201_Assessment_2_Emmey
 
 ## User Story 1 ✔
+
 - On start:
 	- Main Menu Dialogue displayed
 		- 3 options
@@ -16,6 +17,7 @@
 - Other selections are dealt with as follows
 
 ## User Story 2 ✔
+
 - When 1 is pressed
 	- user enter name
 		- name is not null
@@ -27,6 +29,7 @@
 		- add ",false," to the end for first time sign in check
 
 ## User Story 3 ✔
+
 - when 2 is pressed
 	- user enter email
 		- check if email is an email
@@ -40,12 +43,14 @@
 		- display main menu
 
 ## User Story 4 ✔
+
 - log out available in client menu
 - when 6 is pressed
 	- main menu is displayed
 	- all credentials forgotten
 
 ## User Story 5 ✔
+
 - first time user logs in
 	- personal details dialogue displayed
 	- user enters home address
@@ -60,12 +65,15 @@
 	- Client menu is displayed
 
 ## User Story 6 ✔
+
 - All client data is saved to a text file (registeredUsers.csv) immediately
 
 ## User Story 7 ✔
+
 - all user data is available when system starts
 
 ## User Story 8 ✔
+
 - when 1 is pressed in client menu
 	- display product advertisement dialogue
 		- user enters product name

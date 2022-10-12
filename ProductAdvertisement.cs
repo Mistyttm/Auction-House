@@ -47,7 +47,7 @@ namespace AuctionHouse
             while (validDescription == false){
                 Write("Product Description:\n> ");
                 description = ReadLine();
-                if (string.IsNullOrEmpty(description) && description != name){
+                if (string.IsNullOrEmpty(description) || description == name){
                     WriteLine(DESCRIPTIONERROR);
                 } else {
                     validDescription = true;

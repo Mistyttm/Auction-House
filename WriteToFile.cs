@@ -8,7 +8,16 @@ using static System.Console;
 namespace AuctionHouse
 {
     public class WriteToFile{
+        public void CreateFile(string filename, string header){
+            Directory.CreateDirectory("databases");
+            string newFile = "databases/" + filename;
+            using (StreamWriter sw = File.CreateText(newFile)) {        
+                sw.WriteLine(header);
+            }
+        }
+
         public void Write(string fileName, string text){
+            fileName = "databases/" + fileName;
             using (StreamWriter sw = File.AppendText(fileName))
             {
                 sw.WriteLine(text);
@@ -16,6 +25,7 @@ namespace AuctionHouse
         }
 
         public string ReadVariable(string fileName, string text){
+            fileName = "databases/" + fileName;
             string output = "";
             using (StreamReader sr = File.OpenText(fileName))
             {
@@ -37,6 +47,7 @@ namespace AuctionHouse
         }
 
         public string[] ReadLine(string fileName, string user){
+            fileName = "databases/" + fileName;
             string[] output = new string[4];
             using (StreamReader sr = File.OpenText(fileName))
             {
@@ -57,6 +68,7 @@ namespace AuctionHouse
         }
 
         public string OverWriteLine(string fileName, string user, string text){
+            fileName = "databases/" + fileName;
             string output = "";
             int lineToEdit = 0;
             string[] arrLine = File.ReadAllLines(fileName);
