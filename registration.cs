@@ -70,13 +70,11 @@ namespace AuctionHouse
                 }
             }
             string fileName = "registeredUsers.csv";
-            string combinedString = username + "," + email + "," + password + "false,";
-            WriteToFile.Write(fileName, combinedString.ToString());
+            string combinedString = username + "," + email + "," + password + ",false,";
+            WriteToFile userFile = new WriteToFile();
+            userFile.Write(fileName, combinedString.ToString());
 
             WriteLine("Client {0}({1}) has successfully registered at the Auction House.", username, email);
-
-            int milliseconds = 2000;
-            Thread.Sleep(milliseconds);
 
             MainMenu menu = new MainMenu();
             menu.homeMenu(args);

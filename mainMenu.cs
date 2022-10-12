@@ -43,7 +43,8 @@ namespace AuctionHouse
             int choice = Convert.ToInt32( ReadLine() );
             switch (choice){
                 case 1:
-                    WriteLine("Advertise Product");
+                    ProductAdvertisement advertisement = new ProductAdvertisement();
+                    advertisement.advertise(credentials, args);
                     break;
                 case 2:
                     WriteLine("View My Product List");

@@ -64,6 +64,8 @@ namespace AuctionHouse
 
             string[] firstSignInCheck = fileRead.ReadLine("registeredUsers.csv", signedinUser[0]);
 
+            WriteLine(firstSignInCheck[3]);
+
             if (validEmail == true && validPass == true && firstSignInCheck[3] == "true"){
                 menu.clientMenu(signedinUser, args);
             } else if (validEmail == true && validPass == true && firstSignInCheck[3] == "false") {
