@@ -55,7 +55,8 @@ namespace AuctionHouse
                         pass = true;
                         break;
                     case "2":
-                        WriteLine("View My Product List");
+                        ProductsList list = new ProductsList();
+                        list.ListProducts(args, credentials);
                         pass = true;
                         break;
                     case "3":

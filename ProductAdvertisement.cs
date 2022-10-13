@@ -98,7 +98,7 @@ namespace AuctionHouse
                 }
             }
 
-            productFile.Write(FILENAME, productID + "," + username + "," + email + "," + name + "," + description + "," + price + "," + "No Bids,No Bids,$0.00");
+            productFile.Write(FILENAME, productID + "," + username + "," + email + "," + name + "," + description + "," + price + "," + "-,-,-");
             WriteLine(SUCCESS, name, description, price);
 
             menu.clientMenu(credentials, args);

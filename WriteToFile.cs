@@ -94,5 +94,45 @@ namespace AuctionHouse
             File.WriteAllLines(fileName, arrLine);
             return output;
         }
+
+        public int TotalLines(string fileName, string user){
+            int output = 0;
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(","+user+",")){
+                        string[] words = s.Split(',');
+                        output += 1;
+                    }
+                }
+            }
+            return output;
+        }
+
+        public string[,] ReadAllLines(string fileName, string user){
+            fileName = "databases/" + fileName;
+            int totalLines = TotalLines(fileName, user);
+            string[,] output = new string[totalLines, 9];
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                int counter = 0;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(","+user+",")){
+                        string[] words = s.Split(',');
+                        for(int i = 0; i < 9; i++){
+                            output[counter, i] = words[i];
+                        }
+                        counter++;
+                    } else {
+                        output[0,0] = "Error";
+                    }
+                }
+            }
+            return output;
+        }
     }
 }
