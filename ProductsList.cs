@@ -24,24 +24,29 @@ namespace AuctionHouse
             string username = user[0];
 
             string[,] products = fileRead.ReadAllLines(FILENAME, email);
-            int arrLength = products.Length;
-
+            
             WriteLine(TITLE, username, email);
             WriteLine("------------------------------------------------");
-            if (products[0,0] == "Error"){
+            if (products == null){
                 WriteLine(NOPRODUCTS);
                 menu.clientMenu(credentials, args);
             } else {
                 WriteLine(TABLEHEAD);
                 WriteLine(TABLESEPERATOR);
+
+                string[,] sortedByFirstElement = products.OrderBy(x => x[3]);
+                int arrLength = sortedByFirstElement.GetLength(0);
+                
                 for (int i = 0; i < arrLength; i++){
-                    for (int j = 0; j < products.GetLength(1); j++){
-                        Write($"| {products[i,j]} ");
+                    
+                    Write($"|    {i+1}     ");
+                    for (int j = 3; j < sortedByFirstElement.GetLength(1); j++){
+                        Write($"| {sortedByFirstElement[i,j]} ");
                     }
+                    Write("|\n");
                 }
-                menu.clientMenu(credentials, args);
             }
-            
+            menu.clientMenu(credentials, args);
         }
     }
 }

@@ -127,9 +127,10 @@ namespace AuctionHouse
                             output[counter, i] = words[i];
                         }
                         counter++;
-                    } else {
-                        output[0,0] = "Error";
                     }
+                }
+                if (counter == 0){
+                    output = null;
                 }
             }
             return output;
