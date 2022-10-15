@@ -47,7 +47,7 @@ namespace AuctionHouse
             while (validDescription == false){
                 Write("Product Description:\n> ");
                 description = ReadLine();
-                if (string.IsNullOrEmpty(description) && description != name){
+                if (string.IsNullOrEmpty(description) || description == name){
                     WriteLine(DESCRIPTIONERROR);
                 } else {
                     validDescription = true;
@@ -98,7 +98,7 @@ namespace AuctionHouse
                 }
             }
 
-            productFile.Write(FILENAME, productID + "," + username + "," + email + "," + name + "," + description + "," + price + "," + "No Bids,No Bids,$0.00");
+            productFile.Write(FILENAME, productID + "," + username + "," + email + "," + name + "," + description + "," + price + "," + "-,-,-");
             WriteLine(SUCCESS, name, description, price);
 
             menu.clientMenu(credentials, args);
