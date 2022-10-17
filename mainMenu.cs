@@ -60,7 +60,8 @@ namespace AuctionHouse
                         pass = true;
                         break;
                     case "3":
-                        WriteLine("Search For Advertised Products");
+                        ProductSearch search = new ProductSearch();
+                        search.search(args, credentials);
                         pass = true;
                         break;
                     case "4":

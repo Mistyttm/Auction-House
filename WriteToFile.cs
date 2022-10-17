@@ -121,7 +121,7 @@ namespace AuctionHouse
                 int counter = 0;
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains(","+user+",")){
+                    if (s.Contains(user)){
                         string[] words = s.Split(',');
                         for(int i = 0; i < 9; i++){
                             output[counter, i] = words[i];
@@ -135,5 +135,37 @@ namespace AuctionHouse
             }
             return output;
         }
+
+        // public string[,] ReadFile(string fileName, string search){
+        //     fileName = "databases/" + fileName;
+        //     int totalLines = TotalLines(fileName, search);
+        //     string[,] output = new string[totalLines, 9];
+        //     using (StreamReader sr = File.OpenText(fileName))
+        //     {
+        //         string s = "";
+        //         int counter = 0;
+        //         while ((s = sr.ReadLine()) != null)
+        //         {
+        //             if (search == "ALL" || search == "all" || search == "All"){
+        //                 string[] words = s.Split(',');
+        //                 for(int i = 0; i < 9; i++){
+        //                     output[counter, i] = words[i];
+        //                 }
+        //                 counter++;
+        //             } else if (s.Contains(search)) {
+        //                 string[] words = s.Split(',');
+        //                 for(int i = 0; i < 9; i++){
+        //                     output[counter, i] = words[i];
+        //                 }
+        //                 counter++;
+        //             }
+                    
+        //         }
+        //         if (counter == 0){
+        //             output = null;
+        //         }
+        //     }
+        //     return output;
+        // }
     }
 }
