@@ -33,8 +33,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains(","+text+",")){
-                        string[] words = s.Split(',');
+                    if (s.Contains("_"+text+"_")){
+                        string[] words = s.Split('_');
                         int inputWord = Array.IndexOf(words, text); 
                         output = words[inputWord];
                         found = true;
@@ -55,8 +55,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains(","+user+",")){
-                        string[] words = s.Split(',');
+                    if (s.Contains("_"+user+"_")){
+                        string[] words = s.Split('_');
                         output = words;
                         found = true;
                     } else {
@@ -79,8 +79,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains(","+user+",")){
-                        string[] words = s.Split(',');
+                    if (s.Contains("_"+user+"_")){
+                        string[] words = s.Split('_');
                         lineToEdit = LineNumber;
                         output = "Success";
                         found = true;                   
@@ -102,8 +102,8 @@ namespace AuctionHouse
                 string s = "";
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains(","+user+",")){
-                        string[] words = s.Split(',');
+                    if (s.Contains("_"+user+"_")){
+                        string[] words = s.Split('_');
                         output += 1;
                     }
                 }
@@ -122,7 +122,7 @@ namespace AuctionHouse
                 while ((s = sr.ReadLine()) != null)
                 {
                     if (s.Contains(user)){
-                        string[] words = s.Split(',');
+                        string[] words = s.Split('_');
                         for(int i = 0; i < 9; i++){
                             output[counter, i] = words[i];
                         }

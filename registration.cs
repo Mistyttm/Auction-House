@@ -70,7 +70,7 @@ namespace AuctionHouse
                 }
             }
             string fileName = "registeredUsers.csv";
-            string combinedString = username + "," + email + "," + password + ",false,";
+            string combinedString = username + "_" + email + "_" + password + "_false_";
             WriteToFile userFile = new WriteToFile();
             userFile.Write(fileName, combinedString.ToString());
 
