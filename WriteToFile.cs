@@ -111,6 +111,23 @@ namespace AuctionHouse
             return output;
         }
 
+        public int TotalLinesSearch(string fileName, string user){
+            StringComparison comp = StringComparison.OrdinalIgnoreCase;
+            int output = 0;
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(user, comp)){
+                        string[] words = s.Split('_');
+                        output += 1;
+                    }
+                }
+            }
+            return output;
+        }
+
         public string[,] ReadAllLines(string fileName, string user){
             fileName = "databases/" + fileName;
             int totalLines = TotalLines(fileName, user);
@@ -136,36 +153,45 @@ namespace AuctionHouse
             return output;
         }
 
-        // public string[,] ReadFile(string fileName, string search){
-        //     fileName = "databases/" + fileName;
-        //     int totalLines = TotalLines(fileName, search);
-        //     string[,] output = new string[totalLines, 9];
-        //     using (StreamReader sr = File.OpenText(fileName))
-        //     {
-        //         string s = "";
-        //         int counter = 0;
-        //         while ((s = sr.ReadLine()) != null)
-        //         {
-        //             if (search == "ALL" || search == "all" || search == "All"){
-        //                 string[] words = s.Split(',');
-        //                 for(int i = 0; i < 9; i++){
-        //                     output[counter, i] = words[i];
-        //                 }
-        //                 counter++;
-        //             } else if (s.Contains(search)) {
-        //                 string[] words = s.Split(',');
-        //                 for(int i = 0; i < 9; i++){
-        //                     output[counter, i] = words[i];
-        //                 }
-        //                 counter++;
-        //             }
+        public string[,] ReadFile(string fileName, string search){
+            fileName = "databases/" + fileName;
+            StringComparison comp = StringComparison.OrdinalIgnoreCase;
+            string[,] output;
+
+            using (StreamReader sr = File.OpenText(fileName)){
+            if (search == "ALL" || search == "all" || search == "All"){
+                int totalLines = File.ReadAllLines(fileName).Length;
+                output = new string[totalLines, 9];
+            } else {
+                int totalLines = TotalLinesSearch(fileName, search);
+                output = new string[totalLines, 9];
+            }
+                string s = "";
+                int counter = 0;
+                while ((s = sr.ReadLine()) != null){
+                    if (search == "ALL" || search == "all" || search == "All"){
+                        
+
+                        string[] words = s.Split('_');
+                        for(int i = 0; i < 9; i++){
+                            output[counter, i] = words[i];
+                        }
+                        counter++;
+                    } else if (s.Contains(search, comp)) {
+
+                        string[] words = s.Split('_');
+                        for(int i = 0; i < 9; i++){
+                            output[counter, i] = words[i];
+                        }
+                        counter++;
+                    }
                     
-        //         }
-        //         if (counter == 0){
-        //             output = null;
-        //         }
-        //     }
-        //     return output;
-        // }
+                }
+                if (counter == 0){
+                    output = null;
+                }
+            }
+            return output;
+        }
     }
 }
