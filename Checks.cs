@@ -28,7 +28,7 @@ namespace AuctionHouse
 
         public bool passwordCheck (string pass){
             bool output = false;
-            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\,])[A-Za-z\d@$!%*?&\,]{8,}$";
 
             var match = Regex.Match(pass, passwordRegex);
 

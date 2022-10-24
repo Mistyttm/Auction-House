@@ -98,7 +98,7 @@ namespace AuctionHouse
                 }
             }
 
-            productFile.Write(FILENAME, productID + "," + username + "," + email + "," + name + "," + description + "," + price + "," + "-,-,-");
+            productFile.Write(FILENAME, productID + "_" + username + "_" + email + "_" + name + "_" + description + "_" + price + "_" + "-_-_-");
             WriteLine(SUCCESS, name, description, price);
 
             menu.clientMenu(credentials, args);

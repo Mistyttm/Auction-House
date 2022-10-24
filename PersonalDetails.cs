@@ -184,7 +184,7 @@ namespace AuctionHouse
             newDetails[9] = state;
             newDetails[10] = postcode.ToString();
 
-            string newDetailsString = string.Join(",", newDetails);
+            string newDetailsString = string.Join("_", newDetails);
 
             WriteToFile userFile = new WriteToFile();
             userFile.OverWriteLine("registeredUsers.csv", email, newDetailsString);
