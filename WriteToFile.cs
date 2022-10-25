@@ -153,20 +153,21 @@ namespace AuctionHouse
             return output;
         }
 
-        public string[,] ReadFile(string fileName, string search){
+        public string[,] ReadFile(string fileName, string search, string user){
             fileName = "databases/" + fileName;
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             string[,] output;
 
-            using (StreamReader sr = File.OpenText(fileName)){
+            string s = "";
             if (search == "ALL" || search == "all" || search == "All"){
                 int totalLines = File.ReadAllLines(fileName).Length;
                 output = new string[totalLines, 9];
-            } else {
+            } else if (!s.Contains("_"+user+"_")) {
                 int totalLines = TotalLinesSearch(fileName, search);
                 output = new string[totalLines, 9];
             }
-                string s = "";
+
+            using (StreamReader sr = File.OpenText(fileName)){
                 int counter = 0;
                 while ((s = sr.ReadLine()) != null){
                     if (search == "ALL" || search == "all" || search == "All"){
@@ -177,7 +178,7 @@ namespace AuctionHouse
                             output[counter, i] = words[i];
                         }
                         counter++;
-                    } else if (s.Contains(search, comp)) {
+                    } else if (s.Contains(search, comp) && !s.Contains("_" + user + "_")) {
 
                         string[] words = s.Split('_');
                         for(int i = 0; i < 9; i++){
