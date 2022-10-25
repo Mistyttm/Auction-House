@@ -33,8 +33,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains("_"+text+"_")){
-                        string[] words = s.Split('_');
+                    if (s.Contains("‗"+text+"‗")){
+                        string[] words = s.Split('‗');
                         int inputWord = Array.IndexOf(words, text); 
                         output = words[inputWord];
                         found = true;
@@ -55,8 +55,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains("_"+user+"_")){
-                        string[] words = s.Split('_');
+                    if (s.Contains("‗"+user+"‗")){
+                        string[] words = s.Split('‗');
                         output = words;
                         found = true;
                     } else {
@@ -79,8 +79,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains("_"+user+"_")){
-                        string[] words = s.Split('_');
+                    if (s.Contains("‗"+user+"‗")){
+                        string[] words = s.Split('‗');
                         lineToEdit = LineNumber;
                         output = "Success";
                         found = true;                   
@@ -102,8 +102,8 @@ namespace AuctionHouse
                 string s = "";
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains("_"+user+"_")){
-                        string[] words = s.Split('_');
+                    if (s.Contains("‗"+user+"‗")){
+                        string[] words = s.Split('‗');
                         output += 1;
                     }
                 }
@@ -120,7 +120,7 @@ namespace AuctionHouse
                 while ((s = sr.ReadLine()) != null)
                 {
                     if (s.Contains(user, comp)){
-                        string[] words = s.Split('_');
+                        string[] words = s.Split('‗');
                         output += 1;
                     }
                 }
@@ -139,7 +139,7 @@ namespace AuctionHouse
                 while ((s = sr.ReadLine()) != null)
                 {
                     if (s.Contains(user)){
-                        string[] words = s.Split('_');
+                        string[] words = s.Split('‗');
                         for(int i = 0; i < 9; i++){
                             output[counter, i] = words[i];
                         }
@@ -172,14 +172,14 @@ namespace AuctionHouse
                     if (search == "ALL" || search == "all" || search == "All"){
                         
 
-                        string[] words = s.Split('_');
+                        string[] words = s.Split('‗');
                         for(int i = 0; i < 9; i++){
                             output[counter, i] = words[i];
                         }
                         counter++;
                     } else if (s.Contains(search, comp)) {
 
-                        string[] words = s.Split('_');
+                        string[] words = s.Split('‗');
                         for(int i = 0; i < 9; i++){
                             output[counter, i] = words[i];
                         }

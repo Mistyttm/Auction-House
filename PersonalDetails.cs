@@ -120,7 +120,7 @@ namespace AuctionHouse
             while (!validState){
                 Write("State (ACT, NSW, NT, QLD, SA, TAS, VIC, WA):\n> ");
 
-                state = Console.ReadLine();
+                state = Console.ReadLine().ToUpper();
 
                 switch (state){
                     case "ACT":
@@ -184,7 +184,7 @@ namespace AuctionHouse
             newDetails[9] = state;
             newDetails[10] = postcode.ToString();
 
-            string newDetailsString = string.Join("_", newDetails);
+            string newDetailsString = string.Join("‗", newDetails);
 
             WriteToFile userFile = new WriteToFile();
             userFile.OverWriteLine("registeredUsers.csv", email, newDetailsString);
@@ -193,7 +193,7 @@ namespace AuctionHouse
             if (unitNumber == 0){
                 address = streetNumber + " " + streetName + " " + streetSuffix + ", " + city + ", " + state + ", " + postcode;
             } else {
-                address = unitNumber + " " + streetNumber + " " + streetName + " " + streetSuffix + ", " + city + ", " + state + ", " + postcode;
+                address = unitNumber + "/" + streetNumber + " " + streetName + " " + streetSuffix + ", " + city + ", " + state + ", " + postcode;
             }
 
             WriteLine("Address has been updated to {0}", address);

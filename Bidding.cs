@@ -39,10 +39,10 @@ namespace AuctionHouse
                     newProducts[bidItem, 6] = user[0];
                     string newProductsString = "";
                     for (int i = 0; i < 9; i++){
-                        newProductsString += newProducts[bidItem, i] + "_";
+                        newProductsString += newProducts[bidItem, i] + "‗";
                     }
                     newProductsString = newProductsString.Remove(newProductsString.Length - 1);
-                    fileRead.OverWriteLine(FILENAME, products[bidItem, 3] + "_" + products[bidItem, 4], newProductsString);
+                    fileRead.OverWriteLine(FILENAME, products[bidItem, 3] + "‗" + products[bidItem, 4], newProductsString);
                     WriteLine(BIDCONFIRM, bidPrice, products[bidItem, 3]);
                 } else if (Decimal.Parse(bidPrice, System.Globalization.NumberStyles.Currency) > Decimal.Parse(products[bidItem, 8], System.Globalization.NumberStyles.Currency) && check.priceCheck(bidPrice)){
                     newProducts[bidItem, 8] = bidPrice;
@@ -50,10 +50,10 @@ namespace AuctionHouse
                     newProducts[bidItem, 6] = user[0];
                     string newProductsString = "";
                     for (int i = 0; i < 9; i++){
-                        newProductsString += newProducts[bidItem, i] + "_";
+                        newProductsString += newProducts[bidItem, i] + "‗";
                     }
                     newProductsString = newProductsString.Remove(newProductsString.Length - 1);
-                    fileRead.OverWriteLine(FILENAME, products[bidItem, 3] + "_" + products[bidItem, 4], newProductsString);
+                    fileRead.OverWriteLine(FILENAME, products[bidItem, 3] + "‗" + products[bidItem, 4], newProductsString);
                     WriteLine(BIDCONFIRM, bidPrice, products[bidItem, 3]);
                 } else {
                     WriteLine("Invalid Input: Your bid must be higher than the current highest bid.");
