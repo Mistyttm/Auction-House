@@ -19,6 +19,10 @@ namespace AuctionHouse
                 createFile.CreateFile("products.csv");
             }
 
+            if (!File.Exists("databases/sales.csv")) {
+                createFile.CreateFile("sales.csv");
+            }
+
             WriteLine("+------------------------------+\n| Welcome to the Auction House |\n+------------------------------+\n");
 
             menu.homeMenu(args);

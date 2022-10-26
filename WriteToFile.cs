@@ -78,7 +78,7 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains("‗"+user+"‗")){
+                    if (s.Contains(user)){
                         string[] words = s.Split('‗');
                         lineToEdit = LineNumber;
                         output = "Success";
@@ -246,6 +246,20 @@ namespace AuctionHouse
                 }
             }
             return output;
-        } 
+        }
+
+        public void RemoveLine(string filename, string ToRemove){
+            filename = "databases/" + filename;
+            string tempFileName = "temporary.csv";
+            CreateFile(tempFileName);
+            var tempFile = Path.GetTempFileName();
+            var linesToKeep = File.ReadLines(filename).Where(l => l != ToRemove);
+
+            File.WriteAllLines(tempFile, linesToKeep);
+
+            File.Delete(filename);
+            File.Move(tempFile, filename);
+            File.Delete(tempFile);
+        }
     }
 }
