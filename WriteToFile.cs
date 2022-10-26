@@ -8,11 +8,10 @@ using static System.Console;
 namespace AuctionHouse
 {
     public class WriteToFile{
-        public void CreateFile(string filename, string header){
+        public void CreateFile(string filename){
             Directory.CreateDirectory("databases");
             string newFile = "databases/" + filename;
             using (StreamWriter sw = File.CreateText(newFile)) {        
-                sw.WriteLine(header);
             }
         }
 
@@ -104,14 +103,16 @@ namespace AuctionHouse
                 {
                     if (s.Contains("‗"+user+"‗")){
                         string[] words = s.Split('‗');
-                        output += 1;
+                        if (words[7] != user){
+                            output += 1;
+                        }
                     }
                 }
             }
             return output;
         }
 
-        public int TotalLinesSearch(string fileName, string user){
+        public int TotalLinesSearch(string fileName, string search, string user){
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             int output = 0;
             using (StreamReader sr = File.OpenText(fileName))
@@ -119,9 +120,11 @@ namespace AuctionHouse
                 string s = "";
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains(user, comp)){
+                    if (s.Contains(search, comp)){
                         string[] words = s.Split('‗');
-                        output += 1;
+                        if (words[2] != user){
+                            output += 1;
+                        }
                     }
                 }
             }
@@ -140,10 +143,12 @@ namespace AuctionHouse
                 {
                     if (s.Contains(user)){
                         string[] words = s.Split('‗');
-                        for(int i = 0; i < 9; i++){
-                            output[counter, i] = words[i];
+                        if (words[7] != user){
+                            for(int i = 0; i < 9; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
                         }
-                        counter++;
                     }
                 }
                 if (counter == 0){
@@ -153,7 +158,7 @@ namespace AuctionHouse
             return output;
         }
 
-        public string[,] ReadFile(string fileName, string search){
+        public string[,] ReadFile(string fileName, string search, string user){
             fileName = "databases/" + fileName;
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             string[,] output;
@@ -163,7 +168,7 @@ namespace AuctionHouse
                 int totalLines = File.ReadAllLines(fileName).Length;
                 output = new string[totalLines, 9];
             } else {
-                int totalLines = TotalLinesSearch(fileName, search);
+                int totalLines = TotalLinesSearch(fileName, search, user);
                 output = new string[totalLines, 9];
             }
                 string s = "";
@@ -173,17 +178,21 @@ namespace AuctionHouse
                         
 
                         string[] words = s.Split('‗');
-                        for(int i = 0; i < 9; i++){
-                            output[counter, i] = words[i];
+                        if (words[2] != user){
+                            for(int i = 0; i < 9; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
                         }
-                        counter++;
                     } else if (s.Contains(search, comp)) {
 
                         string[] words = s.Split('‗');
-                        for(int i = 0; i < 9; i++){
-                            output[counter, i] = words[i];
+                        if (words[2] != user){
+                            for(int i = 0; i < 9; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
                         }
-                        counter++;
                     }
                     
                 }

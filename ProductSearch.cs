@@ -39,7 +39,7 @@ namespace AuctionHouse
                 WriteLine(ERROR);
             } else if (searchTerm == "All"){
                 int lines = File.ReadAllLines("databases/" + FILENAME).Length;
-                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm);
+                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm, username);
                 WriteLine(SEARCHTITLE);
                 WriteLine("------------------------------------------------");
                 WriteLine(TABLEHEAD);
@@ -62,7 +62,7 @@ namespace AuctionHouse
                     bid.bid(credentials, args, sortedByFirstElement);
                 }
             } else {
-                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm);
+                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm, username);
 
                 if (lineOutput == null){
                     WriteLine(ERROR);
