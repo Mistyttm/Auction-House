@@ -27,7 +27,7 @@ namespace AuctionHouse
             string bidding = ReadLine();
 
             if (bidding == "yes"){
-                Write(BIDITEM, products.Length);
+                Write(BIDITEM, products.GetLength(0));
                 int bidItem = Int32.Parse(ReadLine()) - 1;
                 WriteLine(BIDTITLE, products[bidItem, 3], products[bidItem, 5], products[bidItem, 8]);
                 Write(BID);
