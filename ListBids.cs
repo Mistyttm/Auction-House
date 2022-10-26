@@ -11,6 +11,7 @@ namespace AuctionHouse
         public void ViewBids(string[] args, string[] credentials){
             WriteToFile fileRead = new WriteToFile();
             MainMenu menu = new MainMenu();
+            SellBids sell = new SellBids();
 
             const string FILENAME = "products.csv";
             const string USERFILE = "registeredUsers.csv";
@@ -20,6 +21,8 @@ namespace AuctionHouse
             const string TABLESEPERATOR = "| -------- | ---------------- | -------------- | ------------ | --------------- | ---------------- | --------- |";
 
             string email = credentials[0];
+            string[] user = fileRead.ReadLine(USERFILE, email);
+            string username = user[0];
 
             string[,] products = fileRead.ReadBids(FILENAME, email);
 
@@ -27,6 +30,8 @@ namespace AuctionHouse
                 WriteLine(ERROR);
                 menu.clientMenu(credentials, args);
             } else {
+                WriteLine(TITLE, credentials[0], username);
+                WriteLine("------------------------------------------------");
                 WriteLine(TABLEHEAD);
                 WriteLine(TABLESEPERATOR);
 
@@ -42,7 +47,7 @@ namespace AuctionHouse
                     Write("|\n");
                 }
             }
-            menu.clientMenu(credentials, args);
+            sell.SellBegin(args, credentials, products);
         }
     }
 }
