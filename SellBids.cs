@@ -41,7 +41,7 @@ namespace AuctionHouse
 
             Write(PRODUCT, bids.GetLength(0));
             string product = ReadLine();
-            string[] soldProduct = new string[8];
+            string[] soldProduct = new string[7];
 
             int productBid = 0;
 
@@ -60,14 +60,13 @@ namespace AuctionHouse
                 productString += bids[productBid, i] + "‗";
             }
 
-            soldProduct[1] = bids[productBid, 7]; // name
-            soldProduct[0] = bids[productBid, 6]; // email
-            soldProduct[2] = bids[productBid, 0]; // item ID
-            soldProduct[3] = bids[productBid, 3]; // item
-            soldProduct[4] = bids[productBid, 4]; // item description
-            soldProduct[5] = bids[productBid, 8]; // price
-            soldProduct[6] = bids[productBid, 1]; // previous owner
-            soldProduct[7] = bids[productBid, 2]; // previous owner email
+            soldProduct[0] = bids[productBid, 2]; // seller email
+            soldProduct[1] = bids[productBid, 3]; // product name
+            soldProduct[2] = bids[productBid, 4]; // description
+            soldProduct[3] = bids[productBid, 5]; // List Price
+            soldProduct[4] = bids[productBid, 8]; // amount paid
+            soldProduct[5] = bids[productBid, 6]; // user
+            soldProduct[6] = bids[productBid, 7]; // email
 
             string soldProductString = "";
             for (int i = 0; i < soldProduct.GetLength(0); i++){
