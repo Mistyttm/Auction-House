@@ -158,6 +158,51 @@ namespace AuctionHouse
             return output;
         }
 
+        public int TotalLinesBids(string fileName, string user){
+            int output = 0;
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains("‗"+user+"‗")){
+                        string[] words = s.Split('‗');
+                        if (words[7] != user && words[7] != "-"){
+                            output += 1;
+                        }
+                    }
+                }
+            }
+            return output;
+        }
+
+        public string[,] ReadBids(string fileName, string user){
+            fileName = "databases/" + fileName;
+            int totalLines = TotalLinesBids(fileName, user);
+            string[,] output = new string[totalLines, 9];
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                int counter = 0;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(user)){
+                        string[] words = s.Split('‗');
+                        if (words[7] != user && words[7] != "-"){
+                            for(int i = 0; i < 9; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
+                        }
+                    }
+                }
+                if (counter == 0){
+                    output = null;
+                }
+            }
+            return output;
+        }
+
         public string[,] ReadFile(string fileName, string search, string user){
             fileName = "databases/" + fileName;
             StringComparison comp = StringComparison.OrdinalIgnoreCase;

@@ -65,7 +65,8 @@ namespace AuctionHouse
                         pass = true;
                         break;
                     case "4":
-                        WriteLine("View Bids On My Products");
+                        ListBids bids = new ListBids();
+                        bids.ViewBids(args, credentials);
                         pass = true;
                         break;
                     case "5":
