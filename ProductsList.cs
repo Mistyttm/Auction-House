@@ -16,8 +16,7 @@ namespace AuctionHouse
             const string USERFILE = "registeredUsers.csv";
             const string TITLE = "Product List for {0}({1})";
             const string NOPRODUCTS = "You have no advertised products at the moment.";
-            const string TABLEHEAD = "|  Item #  |   Product name   |   Description  |  List price  |   Bidder name   |   Bidder email   |  Bid amt  |";
-            const string TABLESEPERATOR = "| -------- | ---------------- | -------------- | ------------ | --------------- | ---------------- | --------- |";
+            const string TABLEHEAD = "Item #	Product name	Description	List price	Bidder name	Bidder email	Bid amt";
 
             string email = credentials[0];
             string[] user = fileRead.ReadLine(USERFILE, email);
@@ -32,18 +31,17 @@ namespace AuctionHouse
                 menu.clientMenu(credentials, args);
             } else {
                 WriteLine(TABLEHEAD);
-                WriteLine(TABLESEPERATOR);
 
                 string[,] sortedByFirstElement = products.OrderBy(x => x[3]);
                 int arrLength = sortedByFirstElement.GetLength(0);
                 
                 for (int i = 0; i < arrLength; i++){
                     
-                    Write($"|    {i+1}     ");
+                    Write($"{i+1}	");
                     for (int j = 3; j < sortedByFirstElement.GetLength(1); j++){
-                        Write($"| {sortedByFirstElement[i,j]} ");
+                        Write($"{sortedByFirstElement[i,j]}	");
                     }
-                    Write("|\n");
+                    Write("\n");
                 }
             }
             menu.clientMenu(credentials, args);
