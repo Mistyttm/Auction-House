@@ -10,6 +10,7 @@ namespace AuctionHouse
     {
         public void search(string[] args, string[] credentials){
             WriteToFile fileRead = new WriteToFile();
+            Bidding bid = new Bidding();
             MainMenu menu = new MainMenu();
 
             const string TITLE = "Product search for {0}({1})";
@@ -38,7 +39,7 @@ namespace AuctionHouse
                 WriteLine(ERROR);
             } else if (searchTerm == "All"){
                 int lines = File.ReadAllLines("databases/" + FILENAME).Length;
-                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm);
+                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm, username);
                 WriteLine(SEARCHTITLE);
                 WriteLine("------------------------------------------------");
                 WriteLine(TABLEHEAD);
@@ -58,9 +59,10 @@ namespace AuctionHouse
                         }
                         Write("|\n");
                     }
+                    bid.bid(credentials, args, sortedByFirstElement);
                 }
             } else {
-                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm);
+                string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm, username);
 
                 if (lineOutput == null){
                     WriteLine(ERROR);
@@ -80,10 +82,9 @@ namespace AuctionHouse
                         }
                         Write("|\n");
                     }
+                    bid.bid(credentials, args, sortedByFirstElement);
                 }
             }
-
-            menu.clientMenu(credentials, args);
         }
     }
 }

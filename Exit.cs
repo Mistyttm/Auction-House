@@ -8,7 +8,7 @@ namespace AuctionHouse
     public class Exit
     {
         public void endProgram(string[] args){
-            Console.WriteLine("Exit");
+            Console.WriteLine("+--------------------------------------------------+\n| Good bye, thank you for using the Auction House! |\n+--------------------------------------------------+");
             Environment.Exit(0);
         }
 

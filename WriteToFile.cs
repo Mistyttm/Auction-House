@@ -8,11 +8,10 @@ using static System.Console;
 namespace AuctionHouse
 {
     public class WriteToFile{
-        public void CreateFile(string filename, string header){
+        public void CreateFile(string filename){
             Directory.CreateDirectory("databases");
             string newFile = "databases/" + filename;
             using (StreamWriter sw = File.CreateText(newFile)) {        
-                sw.WriteLine(header);
             }
         }
 
@@ -33,8 +32,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains("_"+text+"_")){
-                        string[] words = s.Split('_');
+                    if (s.Contains("‗"+text+"‗")){
+                        string[] words = s.Split('‗');
                         int inputWord = Array.IndexOf(words, text); 
                         output = words[inputWord];
                         found = true;
@@ -55,8 +54,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains("_"+user+"_")){
-                        string[] words = s.Split('_');
+                    if (s.Contains("‗"+user+"‗")){
+                        string[] words = s.Split('‗');
                         output = words;
                         found = true;
                     } else {
@@ -79,8 +78,8 @@ namespace AuctionHouse
                 bool found = false;
                 while ((s = sr.ReadLine()) != null && found == false)
                 {
-                    if (s.Contains("_"+user+"_")){
-                        string[] words = s.Split('_');
+                    if (s.Contains("‗"+user+"‗")){
+                        string[] words = s.Split('‗');
                         lineToEdit = LineNumber;
                         output = "Success";
                         found = true;                   
@@ -102,16 +101,18 @@ namespace AuctionHouse
                 string s = "";
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains("_"+user+"_")){
-                        string[] words = s.Split('_');
-                        output += 1;
+                    if (s.Contains("‗"+user+"‗")){
+                        string[] words = s.Split('‗');
+                        if (words[7] != user){
+                            output += 1;
+                        }
                     }
                 }
             }
             return output;
         }
 
-        public int TotalLinesSearch(string fileName, string user){
+        public int TotalLinesSearch(string fileName, string search, string user){
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             int output = 0;
             using (StreamReader sr = File.OpenText(fileName))
@@ -119,9 +120,11 @@ namespace AuctionHouse
                 string s = "";
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains(user, comp)){
-                        string[] words = s.Split('_');
-                        output += 1;
+                    if (s.Contains(search, comp)){
+                        string[] words = s.Split('‗');
+                        if (words[2] != user){
+                            output += 1;
+                        }
                     }
                 }
             }
@@ -139,11 +142,13 @@ namespace AuctionHouse
                 while ((s = sr.ReadLine()) != null)
                 {
                     if (s.Contains(user)){
-                        string[] words = s.Split('_');
-                        for(int i = 0; i < 9; i++){
-                            output[counter, i] = words[i];
+                        string[] words = s.Split('‗');
+                        if (words[7] != user){
+                            for(int i = 0; i < 9; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
                         }
-                        counter++;
                     }
                 }
                 if (counter == 0){
@@ -153,7 +158,7 @@ namespace AuctionHouse
             return output;
         }
 
-        public string[,] ReadFile(string fileName, string search){
+        public string[,] ReadFile(string fileName, string search, string user){
             fileName = "databases/" + fileName;
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             string[,] output;
@@ -163,7 +168,7 @@ namespace AuctionHouse
                 int totalLines = File.ReadAllLines(fileName).Length;
                 output = new string[totalLines, 9];
             } else {
-                int totalLines = TotalLinesSearch(fileName, search);
+                int totalLines = TotalLinesSearch(fileName, search, user);
                 output = new string[totalLines, 9];
             }
                 string s = "";
@@ -172,18 +177,22 @@ namespace AuctionHouse
                     if (search == "ALL" || search == "all" || search == "All"){
                         
 
-                        string[] words = s.Split('_');
-                        for(int i = 0; i < 9; i++){
-                            output[counter, i] = words[i];
+                        string[] words = s.Split('‗');
+                        if (words[2] != user){
+                            for(int i = 0; i < 9; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
                         }
-                        counter++;
                     } else if (s.Contains(search, comp)) {
 
-                        string[] words = s.Split('_');
-                        for(int i = 0; i < 9; i++){
-                            output[counter, i] = words[i];
+                        string[] words = s.Split('‗');
+                        if (words[2] != user){
+                            for(int i = 0; i < 9; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
                         }
-                        counter++;
                     }
                     
                 }
@@ -192,6 +201,6 @@ namespace AuctionHouse
                 }
             }
             return output;
-        }
+        } 
     }
 }
