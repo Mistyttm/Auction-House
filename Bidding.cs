@@ -12,6 +12,7 @@ namespace AuctionHouse
             WriteToFile fileRead = new WriteToFile();
             MainMenu menu = new MainMenu();
             Checks check = new Checks();
+            Delivery delivery = new Delivery();
 
             const string FILENAME = "products.csv";
             const string USERFILE = "registeredUsers.csv";
@@ -44,6 +45,8 @@ namespace AuctionHouse
                     newProductsString = newProductsString.Remove(newProductsString.Length - 1);
                     fileRead.OverWriteLine(FILENAME, products[bidItem, 3] + "‗" + products[bidItem, 4], newProductsString);
                     WriteLine(BIDCONFIRM, bidPrice, products[bidItem, 3]);
+
+                    delivery.DeliveryOptions(args, credentials, newProductsString);
                 } else if (Decimal.Parse(bidPrice, System.Globalization.NumberStyles.Currency) > Decimal.Parse(products[bidItem, 8], System.Globalization.NumberStyles.Currency) && check.priceCheck(bidPrice)){
                     newProducts[bidItem, 8] = bidPrice;
                     newProducts[bidItem, 7] = credentials[0];
@@ -55,6 +58,7 @@ namespace AuctionHouse
                     newProductsString = newProductsString.Remove(newProductsString.Length - 1);
                     fileRead.OverWriteLine(FILENAME, products[bidItem, 3] + "‗" + products[bidItem, 4], newProductsString);
                     WriteLine(BIDCONFIRM, bidPrice, products[bidItem, 3]);
+                    delivery.DeliveryOptions(args, credentials, newProductsString);
                 } else {
                     WriteLine("Invalid Input: Your bid must be higher than the current highest bid.");
                     bid(credentials, args, products);
