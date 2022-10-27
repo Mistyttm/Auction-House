@@ -10,6 +10,7 @@ namespace AuctionHouse
 {
     public class Checks
     {
+        // Method for checking if email is valid
         public bool emailCheck (string email){
             bool output = false;
             string emailRegex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
@@ -26,13 +27,14 @@ namespace AuctionHouse
             return output;
         }
 
+        // Method for checking if password is valid
         public bool passwordCheck (string pass){
             bool output = false;
             string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@\(\)\[\]\{\}\;\:\|'""$\-!%*?&\,\.><`~\\])[A-Za-z\d@$!%*?&'""\.><\,\(\)\-\[\]\{\}\;\:\|\\`~]{8,}$";
 
             var match = Regex.Match(pass, passwordRegex);
 
-                // Check if email is valid
+                // Check if password is valid
                 if (!match.Success){
                     WriteLine("Invalid Input: The supplied value is not a valid password");
                 } else {
@@ -42,6 +44,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // method for generating a unique ID
         public string GenerateID (){
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string output = "";
@@ -60,6 +63,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Method for checking if price is valid
         public bool priceCheck (string price){
             bool output = false;
             string priceRegex = @"^\$[0-9]+.[0-9][0-9]$";
