@@ -8,13 +8,6 @@ namespace AuctionHouse
 {
     public class SignIn{
         public void signIn(string[] args){
-            // Sign In
-            // ----------
-            // Please enter your email address
-            // >
-
-            // Please enter your password
-            // >
 
             string correctEmail = "";
             string correctPassword = "";

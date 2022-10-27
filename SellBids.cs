@@ -15,6 +15,7 @@ namespace AuctionHouse
 
             string choice = ReadLine().ToLower();
 
+            // Check if user wants to sell
             switch (choice){
                 case "yes":
                     SellProduct(args, credentials, bids);
@@ -31,20 +32,23 @@ namespace AuctionHouse
         }
 
         private void SellProduct(string[] args, string[] credentials, string[,] bids){
-            WriteToFile fileRead = new WriteToFile();
-            MainMenu menu = new MainMenu();
+            WriteToFile fileRead = new WriteToFile(); // Access Database
+            MainMenu menu = new MainMenu(); // Access MainMenu
 
+            // Constants
             const string FILENAME = "products.csv";
             const string SALESFILE = "sales.csv";
             const string PRODUCT = "Please enter an integer between 1 and {0}:\n> ";
             const string CONFIRM = "You have sold {0} to {1} for {2}.";
 
             Write(PRODUCT, bids.GetLength(0));
+            // Variables
             string product = ReadLine();
             string[] soldProduct = new string[8];
 
             int productBid = 0;
 
+            // Check if bid is valid
             try {
                 productBid = Convert.ToInt32(product) - 1;
                 if (productBid > bids.GetLength(0) || productBid < 0){
@@ -60,6 +64,7 @@ namespace AuctionHouse
                 productString += bids[productBid, i] + "‗";
             }
 
+            // Add product to sales.csv
             soldProduct[0] = bids[productBid, 2]; // seller email
             soldProduct[1] = bids[productBid, 3]; // product name
             soldProduct[2] = bids[productBid, 4]; // description
@@ -76,6 +81,7 @@ namespace AuctionHouse
 
             soldProductString = soldProductString.TrimEnd('‗');
 
+            // Update database
             fileRead.Write(SALESFILE, soldProductString);
 
             productString = productString.Remove(productString.Length - 1, 1);
