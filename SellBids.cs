@@ -41,7 +41,7 @@ namespace AuctionHouse
 
             Write(PRODUCT, bids.GetLength(0));
             string product = ReadLine();
-            string[] soldProduct = new string[7];
+            string[] soldProduct = new string[8];
 
             int productBid = 0;
 
@@ -67,11 +67,14 @@ namespace AuctionHouse
             soldProduct[4] = bids[productBid, 8]; // amount paid
             soldProduct[5] = bids[productBid, 6]; // user
             soldProduct[6] = bids[productBid, 7]; // email
+            soldProduct[7] = bids[productBid, 9]; // date
 
             string soldProductString = "";
             for (int i = 0; i < soldProduct.GetLength(0); i++){
                 soldProductString += soldProduct[i] + "‗";
             }
+
+            soldProductString = soldProductString.TrimEnd('‗');
 
             fileRead.Write(SALESFILE, soldProductString);
 

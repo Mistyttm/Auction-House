@@ -39,7 +39,7 @@ namespace AuctionHouse
                 for (int i = 0; i < arrLength; i++){
                     
                     Write($"{i+1}	");
-                    for (int j = 3; j < sortedByFirstElement.GetLength(1); j++){
+                    for (int j = 3; j < sortedByFirstElement.GetLength(1) - 1; j++){
                         Write($"{sortedByFirstElement[i,j]}	");
                     }
                     Write("\n");

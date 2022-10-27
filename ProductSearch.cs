@@ -36,6 +36,7 @@ namespace AuctionHouse
             searchTerm = ReadLine();
             if (string.IsNullOrEmpty(searchTerm)){
                 WriteLine(ERROR);
+                menu.clientMenu(credentials, args);
             } else if (searchTerm == "All"){
                 int lines = File.ReadAllLines("databases/" + FILENAME).Length;
                 string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm, username);
@@ -45,6 +46,7 @@ namespace AuctionHouse
 
                 if (lineOutput == null){
                     WriteLine(Error);
+                    menu.clientMenu(credentials, args);
                 } else {
                     string[,] sortedByFirstElement = lineOutput.OrderBy(x => x[3]);
                     int arrLength = sortedByFirstElement.GetLength(0);
@@ -64,6 +66,7 @@ namespace AuctionHouse
 
                 if (lineOutput == null){
                     WriteLine(ERROR);
+                    menu.clientMenu(credentials, args);
                 } else {
                     WriteLine(SEARCHTITLE);
                     WriteLine("------------------------------------------------");

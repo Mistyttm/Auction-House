@@ -179,7 +179,7 @@ namespace AuctionHouse
         public string[,] ReadBids(string fileName, string user){
             fileName = "databases/" + fileName;
             int totalLines = TotalLinesBids(fileName, user);
-            string[,] output = new string[totalLines, 9];
+            string[,] output = new string[totalLines, 10];
             using (StreamReader sr = File.OpenText(fileName))
             {
                 string s = "";
@@ -189,7 +189,7 @@ namespace AuctionHouse
                     if (s.Contains(user)){
                         string[] words = s.Split('‗');
                         if (words[7] != user && words[7] != "-"){
-                            for(int i = 0; i < 9; i++){
+                            for(int i = 0; i < 10; i++){
                                 output[counter, i] = words[i];
                             }
                             counter++;
