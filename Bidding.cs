@@ -26,10 +26,17 @@ namespace AuctionHouse
 
             Write(PLACEBID);
             string bidding = ReadLine();
+            int bidItem = 0;
 
             if (bidding == "yes"){
                 Write(BIDITEM, products.GetLength(0));
-                int bidItem = Int32.Parse(ReadLine()) - 1;
+                try {
+                    bidItem = Int32.Parse(ReadLine()) - 1;
+                }
+                catch (Exception){
+                    WriteLine("Invalid input, please try again.");
+                    bid(credentials, args, products);
+                }
                 WriteLine(BIDTITLE, products[bidItem, 3], products[bidItem, 5], products[bidItem, 8]);
                 Write(BID);
                 string bidPrice = ReadLine();

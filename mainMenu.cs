@@ -70,7 +70,8 @@ namespace AuctionHouse
                         pass = true;
                         break;
                     case "5":
-                        WriteLine("View My Purchased Items");
+                        ListPurchases purchases = new ListPurchases();
+                        purchases.ListProducts(args, credentials);
                         pass = true;
                         break;
                     case "6":

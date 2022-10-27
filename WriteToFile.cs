@@ -261,5 +261,32 @@ namespace AuctionHouse
             File.Move(tempFile, filename);
             File.Delete(tempFile);
         }
+
+        public string[,] ReadAllLinesSold(string fileName, string user){
+            fileName = "databases/" + fileName;
+            int totalLines = TotalLines(fileName, user);
+            string[,] output = new string[totalLines, 9];
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                int counter = 0;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(user)){
+                        string[] words = s.Split('‗');
+                        if (words[6] == user){
+                            for(int i = 0; i < 8; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
+                        }
+                    }
+                }
+                if (counter == 0){
+                    output = null;
+                }
+            }
+            return output;
+        }
     }
 }
