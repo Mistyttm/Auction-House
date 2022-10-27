@@ -13,13 +13,9 @@ namespace AuctionHouse
         }
         
         public void enterDetails(string[] args, string[] credentials){
-            // Personal Details for {name}({email})
-            // ------------------------------------------------------
-            // Please provide your home address.
-            // Unit number (0 = none):
-            // >
+            // Variables
             string[] oldDetails = new string[4];
-            WriteToFile file = new WriteToFile();
+            WriteToFile file = new WriteToFile(); // Access Database
             oldDetails = file.ReadLine("registeredUsers.csv", credentials[0]);
             string name = oldDetails[0];
             string email = oldDetails[1];
@@ -39,6 +35,7 @@ namespace AuctionHouse
             
             bool validUnit = false;
 
+            // Unit Number
             while (!validUnit){
                 WriteLine("Please provide your home address.");
                 Write("Unit number (0 = none):\n> ");
@@ -59,6 +56,7 @@ namespace AuctionHouse
 
             bool validStreetNumber = false;
 
+            // Street Number
             while (!validStreetNumber){
                 Write("Street number:\n> ");
 
@@ -75,6 +73,7 @@ namespace AuctionHouse
 
             bool validStreetName = false;
 
+            // Street Name
             while (!validStreetName){
                 Write("Street name:\n> ");
 
@@ -89,6 +88,7 @@ namespace AuctionHouse
 
             bool validStreetSuffix = false;
 
+            // Street Suffix
             while (!validStreetSuffix){
                 Write("Street suffix:\n> ");
 
@@ -103,6 +103,7 @@ namespace AuctionHouse
 
             bool validCity = false;
 
+            // City
             while (!validCity){
                 Write("City:\n> ");
 
@@ -117,6 +118,7 @@ namespace AuctionHouse
 
             bool validState = false;
 
+            // State
             while (!validState){
                 Write("State (ACT, NSW, NT, QLD, SA, TAS, VIC, WA):\n> ");
 
@@ -155,6 +157,7 @@ namespace AuctionHouse
 
             bool validPostcode = false;
 
+             // Postcode
             while (!validPostcode){
                 Write("Postcode:\n> ");
 
@@ -171,6 +174,7 @@ namespace AuctionHouse
                 }
             }
 
+            // Add all the new details to an array
             string[] newDetails = new string[11];
             newDetails[0] = name;
             newDetails[1] = email;
@@ -185,7 +189,8 @@ namespace AuctionHouse
             newDetails[10] = postcode.ToString();
 
             string newDetailsString = string.Join("‗", newDetails);
-
+            
+            // Write the new details to the database
             WriteToFile userFile = new WriteToFile();
             userFile.OverWriteLine("registeredUsers.csv", email, newDetailsString);
 

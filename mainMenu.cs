@@ -6,6 +6,7 @@ using static System.Console;
 
 namespace AuctionHouse
 {
+    // Display main menu
     public class MainMenu
     {
         public void homeMenu(string[] args){
@@ -38,6 +39,7 @@ namespace AuctionHouse
             }
         }
 
+        // Display client menu
         public void clientMenu(string[] credentials, string[] args){
             string[] clientMenu = new string[] {"Advertise Product", "View My Product List", "Search For Advertised Products", "View Bids On My Products", "View My Purchased Items", "Log Off"};
             Menu menu = new Menu();

@@ -6,6 +6,7 @@ using static System.Console;
 
 namespace AuctionHouse
 {
+    // method to display the menu dynamically
     public class Menu
     {
         public string menu(string[] options, string title){
