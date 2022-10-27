@@ -6,25 +6,26 @@ using static System.Console;
 
 namespace AuctionHouse
 {
-    public class ProductsList
+    public class ListPurchases
     {
         public void ListProducts(string[] args, string[] credentials){
             WriteToFile fileRead = new WriteToFile(); // Access Database
             MainMenu menu = new MainMenu(); // Access MainMenu
 
             // Constants
-            const string FILENAME = "products.csv";
+            const string FILENAME = "sales.csv";
             const string USERFILE = "registeredUsers.csv";
-            const string TITLE = "Product List for {0}({1})";
-            const string NOPRODUCTS = "You have no advertised products at the moment.";
-            const string TABLEHEAD = "Item #	Product name	Description	List price	Bidder name	Bidder email	Bid amt";
+            const string TITLE = "Purchased Items for {0}({1})";
+            const string NOPRODUCTS = "You have no purchased products at the moment..";
+            const string TABLEHEAD = "Item #	Seller email	Product name	Description	List price	Amt paid	Delivery option";
 
             // Variables
             string email = credentials[0];
             string[] user = fileRead.ReadLine(USERFILE, email);
             string username = user[0];
 
-            string[,] products = fileRead.ReadAllLines(FILENAME, email);
+            // Get all products
+            string[,] products = fileRead.ReadAllLinesSold(FILENAME, email);
             
             WriteLine(TITLE, username, email);
             WriteLine("------------------------------------------------");
@@ -32,19 +33,21 @@ namespace AuctionHouse
                 WriteLine(NOPRODUCTS);
                 menu.clientMenu(credentials, args);
             } else {
-                // Display table
                 WriteLine(TABLEHEAD);
 
                 // Sort products alphabetically
                 string[,] sortedByFirstElement = products.OrderBy(x => x[3]);
                 int arrLength = sortedByFirstElement.GetLength(0);
                 
-                // Iterate through products
                 for (int i = 0; i < arrLength; i++){
-                    
                     Write($"{i+1}	");
-                    for (int j = 3; j < sortedByFirstElement.GetLength(1); j++){
-                        Write($"{sortedByFirstElement[i,j]}	");
+                    // iterate through products and display them
+                    for (int j = 0; j < sortedByFirstElement.GetLength(1); j++){
+                        if (sortedByFirstElement[i,j] == username || sortedByFirstElement[i,j] == email){
+                            continue;
+                        } else {
+                            Write($"{sortedByFirstElement[i,j]}	");
+                        }
                     }
                     Write("\n");
                 }

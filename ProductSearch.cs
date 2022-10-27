@@ -9,10 +9,11 @@ namespace AuctionHouse
     public class ProductSearch
     {
         public void search(string[] args, string[] credentials){
-            WriteToFile fileRead = new WriteToFile();
-            Bidding bid = new Bidding();
-            MainMenu menu = new MainMenu();
+            WriteToFile fileRead = new WriteToFile(); // Access Database
+            Bidding bid = new Bidding(); // Access bidding
+            MainMenu menu = new MainMenu(); // Access MainMenu
 
+            // Constants
             const string TITLE = "Product search for {0}({1})";
             const string SEARCHTITLE = "Search Results";
             const string TABLEHEAD = "Item #	Product name	Description	List price	Bidder name	Bidder email	Bid amt";
@@ -20,6 +21,7 @@ namespace AuctionHouse
             const string USERFILE = "registeredUsers.csv";
             const string ERROR = "That is an invalid search term";
 
+            // Variables
             string email = credentials[0];
             string[] user = fileRead.ReadLine(USERFILE, email);
             string username = user[0];
@@ -38,6 +40,7 @@ namespace AuctionHouse
                 WriteLine(ERROR);
                 menu.clientMenu(credentials, args);
             } else if (searchTerm == "All"){
+                // Display All products
                 int lines = File.ReadAllLines("databases/" + FILENAME).Length;
                 string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm, username);
                 WriteLine(SEARCHTITLE);
@@ -62,6 +65,7 @@ namespace AuctionHouse
                     bid.bid(credentials, args, sortedByFirstElement);
                 }
             } else {
+                // Display products that match search term
                 string[,] lineOutput = fileRead.ReadFile(FILENAME, searchTerm, username);
 
                 if (lineOutput == null){

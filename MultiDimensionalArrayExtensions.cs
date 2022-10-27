@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace AuctionHouse
 {
+    // Sorts a multidimensional array
     public static class MultiDimensionalArrayExtensions
 {
     public static T[,] OrderBy<T>(this T[,] source, Func<T[], T> keySelector)

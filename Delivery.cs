@@ -8,11 +8,13 @@ namespace AuctionHouse
 {
     public class Delivery
     {
+        // Method for delivery
         public void DeliveryOptions(string[] args, string[] credentials, string products){
-            Menu menuOptions = new Menu();
-            WriteToFile fileWrite = new WriteToFile();
-            MainMenu menu = new MainMenu();
+            Menu menuOptions = new Menu(); // Access menu
+            WriteToFile fileWrite = new WriteToFile(); // Access database
+            MainMenu menu = new MainMenu();// Access Main Menu
 
+            // Options for the menu
             string[] options = new string[] {"Click and collect", "Home Delivery"};
 
             menuOptions.menu(options, "Delivery Options");
@@ -33,9 +35,11 @@ namespace AuctionHouse
             }
         }
 
+        // Click and Collect method
         private void ClickAndCollect(string[] args, string[] credentials, string products){
-            WriteToFile fileWrite = new WriteToFile();
+            WriteToFile fileWrite = new WriteToFile(); // Access database
 
+            // Constants
             const string FILENAME = "products.csv";
             const string DELIVERYSTART = "Delivery window start (dd/mm/yyyy hh:mm)\n> ";
             const string DELIVERYEND = "Delivery window end (dd/mm/yyyy hh:mm)\n> ";
@@ -45,26 +49,33 @@ namespace AuctionHouse
             
 
             Write(DELIVERYSTART);
+            // Start of click and collect window
             string deliveryStartString = ReadLine();
 
             string delivery = products;
 
+            // try to parse the input as a datetime
             try {
                 DateTime deliveryStart = DateTime.Parse(deliveryStartString);
+                // error handling
                 if (deliveryStart < DateTime.Now.AddHours(1)){
                     WriteLine(ERRORSTART);
                     ClickAndCollect(args, credentials, products);
                 } else {
+                    // end of click and collect window
                     Write(DELIVERYEND);
                     string deliveryEndString = ReadLine();
                     try {
                         DateTime deliveryEnd = DateTime.Parse(deliveryEndString);
+                        // error handling
                         if (deliveryEnd < deliveryStart.AddHours(1)){
                             WriteLine(ERROREND);
                             ClickAndCollect(args, credentials, products);
                         } else {
+                            // add delivery info to products string
                             string COLLECT = $"Collect between {deliveryStart.ToString("HH:mm")} on {deliveryStart.ToString("dd/MM/yyyy")} and {deliveryEnd.ToString("HH:mm")} on {deliveryEnd.ToString("dd/MM/yyyy")}";
                             delivery += "‗" + COLLECT;
+                            // Update database
                             fileWrite.OverWriteLine(FILENAME, products, delivery);
                             WriteLine(SUCCESS, deliveryStart.ToString("HH:mm"), deliveryStart.ToString("dd/MM/yyyy"), deliveryEnd.ToString("HH:mm"), deliveryEnd.ToString("dd/MM/yyyy"));
                         }
@@ -79,9 +90,11 @@ namespace AuctionHouse
             }
         }
 
+        // Home Delivery method
         private void HomeDelivery(string[] args, string[] credentials, string products){
             WriteToFile fileWrite = new WriteToFile();
 
+            // Constants
             const string FILENAME = "products.csv";
             const string UNITNUMBER = "Please provide your delivery address.\nUnit number (0 = none):\n> ";
             const string STREETNUMBER = "Street number:\n> ";
@@ -92,6 +105,7 @@ namespace AuctionHouse
             const string POSTCODE = "Postcode (1000 .. 9999):\n> ";
             const string SUCCESS = "Thank you for your bid. If successful, the item will be provided via delivery to {0}/{1} {2} {3} {4} {5} {6}\n> ";
 
+            // Variables
             int unitNumber = 0;
             int streetNumber = 0;
             string streetName = "";
@@ -102,6 +116,7 @@ namespace AuctionHouse
 
             bool validUnit = false;
 
+            // Get unit number
             while (!validUnit){
                 Write(UNITNUMBER);
 
@@ -121,6 +136,7 @@ namespace AuctionHouse
 
             bool validStreetNumber = false;
 
+            // Get street number
             while (!validStreetNumber){
                 Write(STREETNUMBER);
 
@@ -137,6 +153,7 @@ namespace AuctionHouse
 
             bool validStreetName = false;
 
+            // Get street name
             while (!validStreetName){
                 Write(STREETNAME);
 
@@ -151,6 +168,7 @@ namespace AuctionHouse
 
             bool validStreetSuffix = false;
 
+            // Get street suffix
             while (!validStreetSuffix){
                 Write(STREETSUFFIX);
 
@@ -165,6 +183,7 @@ namespace AuctionHouse
 
             bool validCity = false;
 
+            // Get city
             while (!validCity){
                 Write(CITY);
 
@@ -179,6 +198,7 @@ namespace AuctionHouse
 
             bool validState = false;
 
+            // Get state
             while (!validState){
                 Write(STATE);
 
@@ -217,12 +237,11 @@ namespace AuctionHouse
 
             bool validPostcode = false;
 
+            // Get postcode
             while (!validPostcode){
                 Write(POSTCODE);
 
                 postcode = Int32.Parse(Console.ReadLine());
-
-                // TODO refactor this to use proper validation for postcodes if allowed
 
                 if (postcode > 1000 || postcode < 9999){
                     validPostcode = true;
@@ -233,6 +252,7 @@ namespace AuctionHouse
                 }
             }
 
+            // Update Database
             string delivery = products;
             string COLLECT = $"Deliver to {unitNumber}/{streetNumber} {streetName} {streetSuffix} {city} {state} {postcode}";
             delivery += "‗" + COLLECT;

@@ -8,6 +8,7 @@ using static System.Console;
 namespace AuctionHouse
 {
     public class WriteToFile{
+        // Create a file
         public void CreateFile(string filename){
             Directory.CreateDirectory("databases");
             string newFile = "databases/" + filename;
@@ -15,6 +16,7 @@ namespace AuctionHouse
             }
         }
 
+        // Write to a file
         public void Write(string fileName, string text){
             fileName = "databases/" + fileName;
             using (StreamWriter sw = File.AppendText(fileName))
@@ -23,6 +25,7 @@ namespace AuctionHouse
             }
         }
 
+        // Read a single variable from database
         public string ReadVariable(string fileName, string text){
             fileName = "databases/" + fileName;
             string output = "";
@@ -45,6 +48,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Read a line from database
         public string[] ReadLine(string fileName, string user){
             fileName = "databases/" + fileName;
             string[] output = new string[4];
@@ -66,6 +70,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Overwrite a line in a file
         public string OverWriteLine(string fileName, string user, string text){
             fileName = "databases/" + fileName;
             string output = "";
@@ -94,6 +99,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Calculate total lines in a file
         public int TotalLines(string fileName, string user){
             int output = 0;
             using (StreamReader sr = File.OpenText(fileName))
@@ -112,6 +118,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // calculate total lines in a file for a search
         public int TotalLinesSearch(string fileName, string search, string user){
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             int output = 0;
@@ -131,6 +138,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Read all lines for a user
         public string[,] ReadAllLines(string fileName, string user){
             fileName = "databases/" + fileName;
             int totalLines = TotalLines(fileName, user);
@@ -158,6 +166,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Calculate total lines for a bid
         public int TotalLinesBids(string fileName, string user){
             int output = 0;
             using (StreamReader sr = File.OpenText(fileName))
@@ -176,6 +185,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Read all bids
         public string[,] ReadBids(string fileName, string user){
             fileName = "databases/" + fileName;
             int totalLines = TotalLinesBids(fileName, user);
@@ -203,6 +213,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Read all lines for a search
         public string[,] ReadFile(string fileName, string search, string user){
             fileName = "databases/" + fileName;
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
@@ -248,6 +259,7 @@ namespace AuctionHouse
             return output;
         }
 
+        // Remove a line from a file
         public void RemoveLine(string filename, string ToRemove){
             filename = "databases/" + filename;
             string tempFileName = "temporary.csv";
@@ -260,6 +272,34 @@ namespace AuctionHouse
             File.Delete(filename);
             File.Move(tempFile, filename);
             File.Delete(tempFile);
+        }
+
+        // Read all sold lines
+        public string[,] ReadAllLinesSold(string fileName, string user){
+            fileName = "databases/" + fileName;
+            int totalLines = TotalLines(fileName, user);
+            string[,] output = new string[totalLines, 9];
+            using (StreamReader sr = File.OpenText(fileName))
+            {
+                string s = "";
+                int counter = 0;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(user)){
+                        string[] words = s.Split('‗');
+                        if (words[6] == user){
+                            for(int i = 0; i < 8; i++){
+                                output[counter, i] = words[i];
+                            }
+                            counter++;
+                        }
+                    }
+                }
+                if (counter == 0){
+                    output = null;
+                }
+            }
+            return output;
         }
     }
 }
